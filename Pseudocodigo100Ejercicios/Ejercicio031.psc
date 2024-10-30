@@ -17,19 +17,37 @@
 //	
 //FinAlgoritmo
 
-Algoritmo Ejercicio031 // Bucle Mientras
+//Algoritmo Ejercicio031 // Bucle Mientras
+//	
+//	Definir num, contar Como Entero;
+//	contar = 0;
+//	num = 500;
+//	
+//	Mientras num <= 1000 Hacer
+//		Si num % 2 = 0 & num % 3 = 0 Entonces
+//			Imprimir num;
+//			contar = contar + 1;
+//		Fin Si
+//		num = num + 1;
+//	Fin Mientras
+//	
+//	Imprimir contar, " numeros son multiplos de 2 y 3";
+//	
+//FinAlgoritmo
+
+Algoritmo Ejercicio031 // Bucle Repetir
 	
 	Definir num, contar Como Entero;
 	contar = 0;
 	num = 500;
 	
-	Mientras num <= 1000 Hacer
-		Si num % 2 = 0 & num % 3 = 0 Entonces
+	Repetir
+		Si num % 2 = 0 & num % 3 = 0  Entonces
 			Imprimir num;
 			contar = contar + 1;
 		Fin Si
 		num = num + 1;
-	Fin Mientras
+	Hasta Que num > 1000
 	
 	Imprimir contar, " numeros son multiplos de 2 y 3";
 	
