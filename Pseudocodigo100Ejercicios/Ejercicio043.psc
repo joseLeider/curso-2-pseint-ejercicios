@@ -7,14 +7,11 @@
 
 Algoritmo Ejercicio043
 	
-	Definir x, y, alto, ancho, anchoOriginal Como Entero;
-	Definir estructura, estructuraX Como Cadena;
+	Definir alto, ancho, anchoOriginal Como Entero;
+	Definir estructura Como Cadena;
 	
 	estructura = '';
-	estructuraX = '';
 	
-	y = 1;
-	x = 1;
 	alto = 0;
 	ancho = 0;
 	
@@ -25,14 +22,14 @@ Algoritmo Ejercicio043
 	Leer ancho;
 	anchoOriginal = ancho;
 	
-	Mientras y <= alto Hacer
+	Mientras alto > 0 Hacer
+		estructura = ''; // Reiniciar estructura para cada fila
 		ancho = anchoOriginal;
-		Mientras x <= ancho Hacer
-			estructuraX = '*';
-			estructura = Concatenar(estructura, estructuraX);
-			x = x +1;
+		Mientras ancho > 0 Hacer
+			estructura = Concatenar(estructura, '*');
+			ancho = ancho -1;
 		Fin Mientras
 		Imprimir estructura;
-		y = y +1;
+		alto = alto -1;
 	Fin Mientras
 FinAlgoritmo
