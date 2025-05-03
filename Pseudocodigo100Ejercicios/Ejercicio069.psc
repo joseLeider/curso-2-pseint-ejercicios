@@ -1,66 +1,59 @@
 // Ejercicio 069: Crea un subproceso que calcule el mcm (mínimo común multiplo) de varios números proporcionados en un
 // arreglo. Prueba su funcionamiento en el algoritmo principal.
 
-Funcion resultado <- mcm (arrayNumeros, totalNumeros, arrayPrimos, totalPrimos)
-	Definir i, j, resultado Como Entero;
-	resultado = 0;
-	Para i = 0 Hasta totalNumeros-1 Con Paso 1 Hacer
-		Para j = 0 Hasta totalPrimos-1 Con Paso 1 Hacer
-			resultado = arrayNumeros[i] / arrayPrimos[j];
-			Si arrayNumeros[i] % arrayPrimos[j] == 0 Entonces
-				acciones_por_verdadero
+// método por búsqueda.
+
+// Devuelve el mayor número de una lista dada (array)
+Funcion resultado <- Mayor (lista, cantidad)
+	Definir i, resultado Como Entero;
+	resultado = lista[0]; // Asignamos el primer elemento como el mayor
+	
+	Para i = 1 Hasta cantidad-1 Con Paso 1 Hacer
+		Si lista[i] > resultado Entonces
+			resultado = lista[i];
+		Fin Si
+	Fin Para
+Fin Funcion
+// Devuelve el mcm de una lista de números dada (array)
+Funcion resultado <- Mcm (lista, cantidad)
+	Definir resultado, i, multiplos Como Entero;
+	Definir encontrado Como Logico;
+	i = 0;
+	multiplos = 0;
+	encontrado = Falso; // Sera verdadero cuando se encuentre el mcm
+	resultado = Mayor(lista, cantidad); // La busqueda del mcm comienza con el número mayor
+	// Busqueda del mcm
+	Mientras encontrado = Falso Hacer
+		// Se cuentan cuantos numeros de la lista son múltiplos del candidato a mcm
+		multiplos = 0;
+		// Verificamos cuántos números del arreglo dividen exactamente al número actual (resultado)
+		Para i = 0 Hasta cantidad-1 Con Paso 1 Hacer
+			Si resultado % lista[i] = 0 Entonces // ¿resultado es múltiplo exacto de lista[i]?
+				multiplos = multiplos+1; // Contamos cuántos lo dividen exactamente
 			Fin Si
 		Fin Para
-	Fin Para
+		// Si todos los números del arreglo son divisores del número actual, ya encontramos el MCM
+		Si multiplos = cantidad Entonces
+			encontrado = Verdadero;
+		SiNo
+			resultado = resultado+1; // Si no, seguimos probando con el siguiente número
+		Fin Si
+	Fin Mientras
 Fin Funcion
 
 Algoritmo Ejercicio069
 	
-	Definir arrayNumeros, totalNumeros, i, j, arrayPrimos, totalPrimos, resultado, divisores,  p Como Entero;
-	Definir t, x como cadena;
-	t = '';
-	//NumPrimos
-	totalNumeros = 3;
-	totalPrimos = 0;
-	Dimension arrayNumeros[totalNumeros];
-	Dimension arrayPrimos[25];
+	Definir lista, i Como Entero;
+	Dimension lista[5];
 	
-	// CICLO PARA ALMACENAR LOS NUMEROS ALEATORIOS EN UN ARREGLO
-	Imprimir 'numeros';
-	Para i = 0 Hasta totalNumeros-1 Con Paso 1 Hacer
-		arrayNumeros[i] = Aleatorio(2,10);
-		Imprimir arrayNumeros[i];
+	Para i = 0 Hasta 4 Con Paso 1 Hacer
+		lista[i] = azar(9)+1; // Del 1 al 9
 	Fin Para
 	
-	
-	// CICLO PARA PARA ALMACENAR LOS NUMEROS PRIMOS EN UN ARREGLO
-	p = 0;
-	Para i = 1 Hasta 100 Con Paso 1 Hacer
-		divisores = 0;
-		Para j = 1 Hasta i Con Paso 1 Hacer
-			Si i % j == 0 Entonces
-				divisores = divisores+1;
-			Fin Si
-		Fin Para
-		Si divisores == 2 Entonces
-			arrayPrimos[p] = i;
-			totalPrimos = totalPrimos+1;
-			p = p+1;
-		Fin Si
+	Para i = 0 Hasta 4 Con Paso 1 Hacer
+		Escribir lista[i], ' ' Sin Saltar;
 	Fin Para
-	
-	Escribir 'Array de primos';
-	Para i = 0 Hasta totalPrimos-1 Con Paso 1 Hacer
-		Imprimir arrayPrimos[i];
-	Fin Para
-	
-	Imprimir '';
-	// FUNCION QUE DETERMINA EL MCM DE UN ARREGLO DE NUMEROS
-	Imprimir 'mcm';
-	resultado = mcm(arrayNumeros, totalNumeros, arrayPrimos, totalPrimos);
-	Imprimir 'resultado', resultado;
-	Imprimir arrayPrimos[24];
-	
-	Imprimir  8%2;
+	Escribir '';
+	Escribir 'El mcm es :', ' ', Mcm(lista,5);
 	
 FinAlgoritmo
